@@ -9,7 +9,7 @@ Dieses Repository enthält die aktuell gültigen Dokumente, die für alle Mitgli
 - `agb.html` – Allgemeine Geschäftsbedingungen (AGB) für den Nerdtopia Discord Server  
 - `datenschutz.html` – Datenschutzerklärung für den Nerdtopia Discord Server  
 
----
+
 
 ## Geltungsbereich
 - Diese Regeln gelten für alle Mitglieder des Nerdtopia Discord Servers.  
@@ -27,12 +27,11 @@ Dieses Repository enthält die aktuell gültigen Dokumente, die für alle Mitgli
 Die Webseite ist vollständig öffentlich und kann direkt über GitHub Pages besucht werden:  
 [https://owner-dev25.github.io/nerdtopia-tos/](https://owner-dev25.github.io/nerdtopia-tos/)
 
-## Hinweise
-- Stand: **28. Januar 2026**  
-- Uhrzeit Inkrafttreten: **11:35 Uhr**  
-- Änderungen an den AGB oder der Datenschutzerklärung werden in diesem Repo dokumentiert.  
-
 
 
 ## Kontakt
 Bei Fragen kannst du dich jederzeit direkt per DM an den **Owner** des Nerdtopia Discord Servers wenden.
+
+
+
+<p align="center"><strong>© 2026 Nerdtopia Discord Server</strong></p>
