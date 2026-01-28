@@ -15,37 +15,124 @@
   --font: 'Inter', sans-serif;
 }
 
+/* Grundstil */
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: var(--font); background: var(--bg); color: var(--text); min-height:100vh; }
-
-header {
-  position: fixed; top:0; left:0; width:100%; background:var(--secondary);
-  display:flex; justify-content:space-between; align-items:center; padding:1.5rem 4rem;
-  border-bottom:1px solid #222; z-index:1000;
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
-header h1 { color: var(--primary); font-size:2.2rem; font-weight:700; }
+
+/* Header */
+header {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background: var(--secondary);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1.5rem 5%;
+  border-bottom:1px solid #222;
+  z-index:1000;
+}
+header h1 {
+  color: var(--primary);
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight:700;
+}
+
+/* Navigation */
+nav {
+  display:flex;
+  align-items:center;
+  gap:2rem;
+}
 nav a {
-  color: var(--text); text-decoration:none; margin-left:2rem; font-weight:600; font-size:1.1rem; position:relative;
+  color: var(--text);
+  text-decoration:none;
+  font-weight:600;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  position:relative;
 }
 nav a::after {
-  content:''; position:absolute; width:0%; height:3px; background:var(--primary); left:0; bottom:-5px; transition:0.3s;
+  content:'';
+  position:absolute;
+  width:0%;
+  height:3px;
+  background:var(--primary);
+  left:0;
+  bottom:-5px;
+  transition:0.3s;
 }
 nav a:hover::after { width:100%; }
 
-main {
-  padding-top:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:100vh;
+/* Hamburger-Button */
+.hamburger {
+  display:none;
+  flex-direction:column;
+  cursor:pointer;
+  gap:5px;
+}
+.hamburger span {
+  display:block;
+  width:25px;
+  height:3px;
+  background: var(--text);
+  border-radius:2px;
 }
 
-h2 { font-size:3rem; color:var(--primary); margin-bottom:1rem; }
-p { font-size:1.2rem; max-width:700px; line-height:1.8; }
+/* Main Content */
+main {
+  padding-top: calc(10vw + 100px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  min-height:100vh;
+}
+h2 { font-size: clamp(2.5rem, 5vw, 3rem); color:var(--primary); margin-bottom:1rem; }
+p { font-size: clamp(1rem, 2vw, 1.2rem); max-width:700px; line-height:1.8; }
 
-footer { text-align:center; padding:3rem; background:var(--secondary); border-top:1px solid #222; font-size:1rem; color:#888; }
+/* Footer */
+footer {
+  text-align:center;
+  padding:3rem 5%;
+  background: var(--secondary);
+  border-top:1px solid #222;
+  font-size:1rem;
+  color:#888;
+}
+a { color: var(--primary); text-decoration:underline; }
+a:hover { color: var(--accent); }
 
+/* Tablets (768px–1024px) */
+@media (max-width:1024px) {
+  header { padding:1rem 4%; }
+  nav { gap:1.5rem; }
+  main { padding-top: calc(8vw + 80px); }
+}
+
+/* Handys (<768px) */
 @media(max-width:768px){
-  header{padding:1rem 2rem;}
-  nav a{margin-left:1rem; font-size:1rem;}
-  h2{font-size:2.5rem;}
-  p{font-size:1.1rem;}
+  header { padding:1rem 3%; flex-direction:column; align-items:flex-start; gap:0.5rem; }
+  
+  /* Hamburger einblenden */
+  .hamburger { display:flex; }
+  
+  nav {
+    display:none; /* wird per JS geöffnet */
+    flex-direction:column;
+    width:100%;
+    gap:1rem;
+    margin-top:0.5rem;
+  }
+  nav.active { display:flex; }
 }
 </style>
 </head>
@@ -53,7 +140,14 @@ footer { text-align:center; padding:3rem; background:var(--secondary); border-to
 
 <header>
   <h1>Nerdtopia Discord</h1>
-  <nav>
+  
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav id="nav">
     <a href="index.html">Home</a>
     <a href="agb.html">AGBs</a>
     <a href="datenschutz.html">Datenschutzerklärung</a>
@@ -69,6 +163,15 @@ footer { text-align:center; padding:3rem; background:var(--secondary); border-to
 <footer>
   &copy; 2026 Nerdtopia Discord Server. Alle Rechte vorbehalten.
 </footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const nav = document.getElementById('nav');
+
+hamburger.addEventListener('click', () => {
+  nav.classList.toggle('active');
+});
+</script>
 
 </body>
 </html>

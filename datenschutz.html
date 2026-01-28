@@ -15,48 +15,125 @@
   --font: 'Inter', sans-serif;
 }
 
+/* Grundstil */
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: var(--font); background: var(--bg); color: var(--text); min-height:100vh; display:flex; flex-direction:column; }
-
-header {
-  position: fixed; top:0; left:0; width:100%; background: var(--secondary);
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1.5rem 4rem; border-bottom:1px solid #222; z-index:1000;
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
-header h1 { color: var(--primary); font-size:2.2rem; font-weight:700; }
+
+/* Header */
+header {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background: var(--secondary);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1.5rem 5%;
+  border-bottom:1px solid #222;
+  z-index:1000;
+}
+header h1 {
+  color: var(--primary);
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight:700;
+}
+
+/* Navigation */
+nav {
+  display:flex;
+  align-items:center;
+  gap:2rem;
+}
 nav a {
-  color: var(--text); text-decoration:none; margin-left:2rem; font-weight:600; font-size:1.1rem; position:relative;
+  color: var(--text);
+  text-decoration:none;
+  font-weight:600;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  position:relative;
 }
 nav a::after {
-  content:''; position:absolute; width:0%; height:3px; background:var(--primary); left:0; bottom:-5px; transition:0.3s;
+  content:'';
+  position:absolute;
+  width:0%;
+  height:3px;
+  background:var(--primary);
+  left:0;
+  bottom:-5px;
+  transition:0.3s;
 }
 nav a:hover::after { width:100%; }
 
+/* Hamburger-Button */
+.hamburger {
+  display:none;
+  flex-direction:column;
+  cursor:pointer;
+  gap:5px;
+}
+.hamburger span {
+  display:block;
+  width:25px;
+  height:3px;
+  background: var(--text);
+  border-radius:2px;
+}
+
+/* Main Content */
 main {
   flex:1;
-  padding:140px 4rem 4rem 4rem;
-  max-width:1000px; margin:0 auto;
+  padding: calc(10vw + 20px) 5% 4rem 5%;
+  max-width:1000px;
+  margin:0 auto;
 }
-h1 { font-size:3rem; color:var(--primary); margin-bottom:1rem; }
-h2 { font-size:2rem; color:var(--primary); margin-top:2rem; margin-bottom:0.75rem; }
-p { font-size:1.1rem; line-height:1.8; margin-bottom:1rem; }
+h1 { font-size: clamp(2.5rem, 5vw, 3rem); color:var(--primary); margin-bottom:1rem; }
+h2 { font-size: clamp(1.7rem, 4vw, 2rem); color:var(--primary); margin-top:2rem; margin-bottom:0.75rem; }
+h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom:0.5rem; }
+p { font-size: clamp(0.95rem, 2vw, 1.1rem); line-height:1.8; margin-bottom:1rem; }
 ul { margin-left:1.5rem; margin-bottom:1rem; }
 li { margin-bottom:0.5rem; }
 
+/* Footer */
 footer {
-  text-align:center; padding:3rem; background: var(--secondary); border-top:1px solid #222; font-size:1rem; color:#888;
+  text-align:center;
+  padding:3rem 5%;
+  background: var(--secondary);
+  border-top:1px solid #222;
+  font-size:1rem;
+  color:#888;
 }
-
 a { color: var(--primary); text-decoration:underline; }
 a:hover { color: var(--accent); }
 
+/* Tablets (768px–1024px) */
+@media (max-width:1024px) {
+  header { padding:1rem 4%; }
+  nav { gap:1.5rem; }
+  main { padding: calc(8vw + 20px) 4% 2rem 4%; }
+}
+
+/* Handys (<768px) */
 @media(max-width:768px){
-  header { padding:1rem 2rem; }
-  nav a { margin-left:1rem; font-size:1rem; }
-  h1 { font-size:2.5rem; }
-  h2 { font-size:1.7rem; }
-  p, li { font-size:1rem; }
-  main { padding:120px 2rem 2rem 2rem; }
+  header { padding:1rem 3%; flex-direction:column; align-items:flex-start; gap:0.5rem; }
+  
+  /* Hamburger einblenden */
+  .hamburger { display:flex; }
+  
+  nav {
+    display:none; /* wird per JS geöffnet */
+    flex-direction:column;
+    width:100%;
+    gap:1rem;
+    margin-top:0.5rem;
+  }
+  nav.active { display:flex; }
 }
 </style>
 </head>
@@ -64,7 +141,14 @@ a:hover { color: var(--accent); }
 
 <header>
   <h1>Datenschutzerklärung Nerdtopia Discord Server</h1>
-  <nav>
+  
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav id="nav">
     <a href="index.html">Home</a>
     <a href="agb.html">AGBs</a>
     <a href="datenschutz.html">Datenschutzerklärung</a>
@@ -79,7 +163,6 @@ a:hover { color: var(--accent); }
   <h3><strong>Tritt in Kraft am: 28 Januar 2026</strong></h3>
   <p></p>
   <h3><strong>Tritt in Kraft um: 11:35 Uhr</strong></h3>
-
 
   <h2>1. Verantwortlicher</h2>
   <p>Verantwortlich für die Datenverarbeitung auf diesem Discord Server ist der Owner des Servers. Kontaktdaten des Owners sind über eine private Nachricht an ihn erhältlich.</p>
@@ -142,6 +225,15 @@ a:hover { color: var(--accent); }
 <footer>
   &copy; 2026 Nerdtopia Discord Server. Alle Rechte vorbehalten.
 </footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const nav = document.getElementById('nav');
+
+hamburger.addEventListener('click', () => {
+  nav.classList.toggle('active');
+});
+</script>
 
 </body>
 </html>
