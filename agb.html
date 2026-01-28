@@ -45,14 +45,16 @@ header h1 {
   font-size: clamp(1.8rem, 4vw, 2.2rem);
   font-weight:700;
 }
+
+/* Navigation */
 nav {
   display:flex;
-  flex-wrap:wrap; /* Rutscht bei kleinen Bildschirmen um */
+  align-items:center;
+  gap:2rem;
 }
 nav a {
   color: var(--text);
   text-decoration:none;
-  margin-left:2rem;
   font-weight:600;
   font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   position:relative;
@@ -68,6 +70,21 @@ nav a::after {
   transition:0.3s;
 }
 nav a:hover::after { width:100%; }
+
+/* Hamburger-Button */
+.hamburger {
+  display:none;
+  flex-direction:column;
+  cursor:pointer;
+  gap:5px;
+}
+.hamburger span {
+  display:block;
+  width:25px;
+  height:3px;
+  background: var(--text);
+  border-radius:2px;
+}
 
 /* Main Content */
 main {
@@ -98,15 +115,25 @@ a:hover { color: var(--accent); }
 /* Tablets (768px–1024px) */
 @media (max-width:1024px) {
   header { padding:1rem 4%; }
-  nav a { margin-left:1.5rem; font-size:1.05rem; }
+  nav { gap:1.5rem; }
   main { padding: calc(8vw + 20px) 4% 2rem 4%; }
 }
 
 /* Handys (<768px) */
 @media(max-width:768px){
   header { padding:1rem 3%; flex-direction:column; align-items:flex-start; gap:0.5rem; }
-  nav a { margin-left:1rem; font-size:1rem; }
-  main { padding: calc(12vw + 20px) 3% 2rem 3%; }
+  
+  /* Hamburger einblenden */
+  .hamburger { display:flex; }
+  
+  nav {
+    display:none; /* wird per JS geöffnet */
+    flex-direction:column;
+    width:100%;
+    gap:1rem;
+    margin-top:0.5rem;
+  }
+  nav.active { display:flex; }
 }
 </style>
 </head>
@@ -114,7 +141,14 @@ a:hover { color: var(--accent); }
 
 <header>
   <h1>AGBS Nerdtopia Discord Server</h1>
-  <nav>
+  
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav id="nav">
     <a href="index.html">Home</a>
     <a href="agb.html">AGBs</a>
     <a href="datenschutz.html">Datenschutzerklärung</a>
@@ -176,6 +210,15 @@ a:hover { color: var(--accent); }
 <footer>
   &copy; 2026 Nerdtopia Discord Server. Alle Rechte vorbehalten.
 </footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const nav = document.getElementById('nav');
+
+hamburger.addEventListener('click', () => {
+  nav.classList.toggle('active');
+});
+</script>
 
 </body>
 </html>
